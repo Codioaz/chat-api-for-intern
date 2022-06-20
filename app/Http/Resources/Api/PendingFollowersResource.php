@@ -22,9 +22,8 @@ class PendingFollowersResource extends JsonResource
             'email'             => $this->email,
             'routes'            => [
                 'approve'       => route('api.v1.auth.user.approve', $this->id),
-                'cancel'        => route('api.v1.auth.user.cancel', $this->id)
+                'cancel'        => route('api.v1.auth.user.reject', $this->id)
             ]
-
         ];
     }
 }

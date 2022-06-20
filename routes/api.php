@@ -39,6 +39,7 @@ Route::group([ 'prefix' => 'v1','as' => 'v1.'], function () {
                     Route::post('{user:id}/follow',[ FollowerController::class, 'follow'])->name('follow');
                     Route::post('{user:id}/unfollow',[ FollowerController::class, 'unfollow'])->name('unfollow');
                     Route::post('{user:id}/follow/approve',[ FollowerController::class, 'approve'])->name('approve');
+                    Route::post('{user:id}/follow/reject',[ FollowerController::class, 'reject'])->name('reject');
                     Route::post('{user:id}/follow/cancel',[ FollowerController::class, 'cancel'])->name('cancel');
                 });
         });
