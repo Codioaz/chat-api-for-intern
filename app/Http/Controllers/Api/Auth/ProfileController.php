@@ -22,11 +22,11 @@ class ProfileController extends Controller
         ]);
         $message = __('Profile updated successfully');
 
-        $request->whenFilled('current_password', function () use ($request, &$data) {
+        $request->whenFilled('password', function () use ($request, &$data) {
             $request->validate([
-                'current_password' => 'required|password',
-                'password' => ['required', 'string', 'confirmed','different:current_password'],
+                'password' => ['required', 'string', 'confirmed'],
             ]);
+
             return $data['password'] = bcrypt($request->get('password'));
         });
 
