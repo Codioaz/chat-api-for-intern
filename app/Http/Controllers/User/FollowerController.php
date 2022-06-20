@@ -10,8 +10,14 @@ use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
-    public function pending(){
-        return PendingFollowersResource::collection(auth()->user()->followers()->wherePivot('approved', false)->get());
+    public function pending()
+    {
+        return PendingFollowersResource::collection(auth()
+            ->user()
+            ->followers()
+            ->wherePivot('approved', false)
+            ->get()
+        );
     }
 
     public function approve(User $user): \Illuminate\Http\Response
@@ -22,6 +28,7 @@ class FollowerController extends Controller
             'message' => 'Takib istəyin qəbul etdin '
         ]);
     }
+
     public function reject(User $user): \Illuminate\Http\Response
     {
         auth()->user()->rejectRequest($user['id']);
