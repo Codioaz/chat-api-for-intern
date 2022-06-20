@@ -5,7 +5,7 @@ namespace App\Http\Resources\Api;
 use Afea\Resume\Transformers\Api\Common\ResumeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AuthResource extends JsonResource
+class FollowersResource extends JsonResource
 {
 
     /**
@@ -20,6 +20,7 @@ class AuthResource extends JsonResource
             'userId'            => $this->id,
             'name'              => $this->name,
             'email'             => $this->email,
+
         ];
     }
 }

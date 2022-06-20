@@ -14,9 +14,9 @@ if (! function_exists('codioResponse')){
      * @param array $data
      * @param int $code
      * @param array $headers
-     * @return \Response
+     * @return \Illuminate\Http\Response
      */
-    function codioResponse(array $data = [], int $code = Response::HTTP_OK, array $headers = []): Illuminate\Http\Response
+    function codioResponse(array $data = [], int $code = Response::HTTP_OK, array $headers = []): \Illuminate\Http\Response
     {
         return response($data, $code, $headers);
     }
