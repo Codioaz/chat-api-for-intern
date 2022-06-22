@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Api\User;
 
 use App\Classes\Api\OAuth;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\AuthResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,6 +15,13 @@ class ProfileController extends Controller
     {
         $auth = auth()->user();
         return codioResponse([ 'data' => OAuth::mergedToken($auth) ]);
+    }
+
+    public function showProfile(User $user): Response
+    {
+        return codioResponse([
+            'data' => new AuthResource($user)
+        ]);
     }
 
     public function update(Request $request): \Illuminate\Http\Response

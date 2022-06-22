@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\FollowersResource;
 use App\Http\Resources\Api\PendingFollowersResource;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
@@ -44,6 +42,14 @@ class FollowerController extends Controller
 
         return codioResponse([
             'message' => 'Takib istəyin ləğv etdin '
+        ]);
+    }
+
+    public function unfollow(User $user){
+        $user->followers()->detach(auth()->id());
+
+        return codioResponse([
+            'message' => 'Takibdən çıxınız!'
         ]);
     }
 
