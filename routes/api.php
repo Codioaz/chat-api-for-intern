@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([ 'prefix' => 'v1','as' => 'v1.'], function () {
+    Route::get('', function (){
+        return ['site' => 'codio.az'];
+    });
+
     Route::group(['as' => 'auth.', 'prefix' => 'auth'], function (){
         Route::group(['middleware' => 'auth:sanctum'], function (){
 
