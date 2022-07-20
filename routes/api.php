@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\User\FollowerController;
 use App\Http\Controllers\Api\User\ProfileController;
+use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,10 @@ Route::group([ 'prefix' => 'v1','as' => 'v1.'], function () {
 
     Route::group(['as' => 'auth.', 'prefix' => 'auth'], function (){
         Route::group(['middleware' => 'auth:sanctum'], function (){
-            
+
+
+            Route::get('users', [UserController::class,'index'])->name('user.index');
+
             Route::controller(ProfileController::class)
                 ->as('profile.')
                 ->prefix('profile')
