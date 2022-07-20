@@ -25,7 +25,7 @@ Route::group([ 'prefix' => 'v1','as' => 'v1.'], function () {
 
     Route::group(['as' => 'auth.', 'prefix' => 'auth'], function (){
         Route::group(['middleware' => 'auth:sanctum'], function (){
-
+            
             Route::controller(ProfileController::class)
                 ->as('profile.')
                 ->prefix('profile')
