@@ -19,6 +19,7 @@ class MessageController extends Controller
     public function index()
     {
         $messages  = auth()->user()->messages()->with('to')->select('to_id')->groupBy('to_id')->get();
+        dd($messages);
 
         return ToMessageResource::collection($messages);
     }
@@ -51,10 +52,14 @@ class MessageController extends Controller
      */
     public function show(User $user)
     {
-        $messages = Message::where(function ($query) use ($user){
-            $query->where('user_id', auth()->id())->orWhere('to_id', $user->id);
-        })->get();
 
+        $messages = Message::where(function ($query) use ($user){
+            $query->where('user_id', auth()->id())->where('to_id', $user->id);
+        })->orWhere(function ($query) use ($user){
+            $query->where('user_id', $user->id)->where('to_id',  auth()->id());
+        })->simplePaginate(10);
+        
+        
         return MessageResource::collection($messages);
     }
 }

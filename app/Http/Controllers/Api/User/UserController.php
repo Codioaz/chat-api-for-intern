@@ -13,6 +13,7 @@ class UserController extends Controller
         $users = User::where('id', '<>', auth()->id())
             ->paginate(10);
 
+
         return AuthResource::collection($users);
     }
 }
