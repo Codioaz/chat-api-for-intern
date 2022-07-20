@@ -20,6 +20,7 @@ class AuthResource extends JsonResource
             'userId'            => $this->id,
             'name'              => $this->name,
             'email'             => $this->email,
+            'image'             => 'https://picsum.photos/id/'.$this->id.'/200/300',
         ];
     }
 }

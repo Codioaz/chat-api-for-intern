@@ -17,6 +17,7 @@ class PendingFollowersResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'image'             => 'https://picsum.photos/id/'.$this->id.'/200/300',
             'userId'            => $this->id,
             'name'              => $this->name,
             'email'             => $this->email,
