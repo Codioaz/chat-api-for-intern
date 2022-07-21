@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        $users = User::where('id', '<>', auth()->id())->paginate(10);
+        $users = User::where('id', '<>', auth()->id())->orderBy('id', 'desc')->get();
 
         return AuthResource::collection($users);
     }
