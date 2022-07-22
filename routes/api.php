@@ -45,6 +45,8 @@ Route::group([ 'prefix' => 'v1','as' => 'v1.'], function () {
                     Route::get('', 'index')->name('show');
                     Route::post('', 'store')->name('store');
                     Route::get('{user:id}/user', 'show')->name('show');
+                    Route::post('{user:id}/delete/all','destroy')->name('destroy');
+                    Route::post('{message:id}/delete','destroyMessage')->name('destroyMessage');
                 });
 
             Route::controller(FollowerController::class)

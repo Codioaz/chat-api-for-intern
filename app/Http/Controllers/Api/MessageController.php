@@ -8,6 +8,8 @@ use App\Http\Resources\Api\ToMessageResource;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Psy\Readline\Hoa\Console;
 
 class MessageController extends Controller
 {
@@ -19,7 +21,6 @@ class MessageController extends Controller
     public function index()
     {
         $messages  = auth()->user()->messages()->with('to')->select('to_id')->groupBy('to_id')->get();
-        dd($messages);
 
         return ToMessageResource::collection($messages);
     }
@@ -61,5 +62,21 @@ class MessageController extends Controller
         
         
         return MessageResource::collection($messages);
+    }
+
+    public function destroy(User $user){
+        
+        $messages = Message::where(function ($query) use ($user){
+            $query->where('user_id', auth()->id())->where('to_id', $user->id);
+        })->orWhere(function ($query) use ($user){
+            $query->where('user_id', $user->id)->where('to_id',  auth()->id());
+        })->delete();
+
+    }
+
+    public function destroyMessage(Message $message){
+        abort_if( auth()->id() != $message->user_id, 404);
+        $message->delete();
+        return "Deleted";
     }
 }
